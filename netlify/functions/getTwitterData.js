@@ -9,14 +9,15 @@ exports.handler = async function(event, context) {
     };
 
     try {
-    const response = await axios.get(API_URL, { headers: HEADERS });
-    return {
-        statusCode: 200,
-        body: JSON.stringify(response.data)
-    };
-} catch (error) {
-    return {
-        statusCode: 500,
-        body: JSON.stringify({ error: error.message })
-    };
-}
+        const response = await axios.get(API_URL, { headers: HEADERS });
+        return {
+            statusCode: 200,
+            body: JSON.stringify(response.data)
+        };
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: error.message })
+        };
+    }
+}; // Esta é a chave de fechamento que estava faltando
