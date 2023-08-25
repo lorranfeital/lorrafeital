@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisador de Tendências de Mercado</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Tendências de Mercado - Exemplo de Gráfico</h2>
+
+    <canvas id="meuGrafico" width="400" height="200"></canvas>
+
+    <script>
+        var ctx = document.getElementById('meuGrafico').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+                datasets: [{
+                    label: 'Vendas',
+                    borderColor: 'rgb(75, 192, 192)',
+                    data: [0, 10, 5, 2, 20]
+                }]
+            },
+            options: {}
+        });
+    </script>
+
+</body>
+
+</html>
