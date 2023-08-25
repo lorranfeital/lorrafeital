@@ -7,7 +7,7 @@ exports.handler = async function(event, context) {
     const config = {
         headers: {
             'Authorization': 'bearer ' + accessToken,
-            'User-Agent': 'Sonda Social'
+            'User-Agent': 'SondaSocial'
         }
     };
 
