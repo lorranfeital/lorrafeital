@@ -25,7 +25,13 @@ async function fetchRedditPosts() {
         });
         
         const postData = await postsResponse.json();
-        displayChart(postData.data.children); // Passa as postagens para a função displayChart
+
+        // Verifique se postData e postData.data estão definidos antes de tentar acessar children
+        if (postData && postData.data && postData.data.children) {
+            displayChart(postData.data.children); // Passa as postagens para a função displayChart
+        } else {
+            console.error("Dados do Reddit não estão no formato esperado:", postData);
+        }
 
     } catch (error) {
         console.error("Erro ao buscar posts do Reddit:", error);
