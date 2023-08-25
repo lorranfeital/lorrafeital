@@ -2,7 +2,7 @@ const axios = require('axios');
 const qs = require('querystring');
 
 exports.handler = async function(event, context) {
-    const auth = 'Basic ' + Buffer.from('lmdD3-_YyhYG3ruys20d0g:5dTNdTSXmRpVnE2SvBiX8zOo8VLFeQ').toString('base64');
+    const auth = 'Basic ' + Buffer.from('mLs9_VB4jRMvAlVqkZbHFg:sym_N2ciyBTTGDtYXQXW4FrOxmc99g').toString('base64');
 
     const config = {
         headers: {
