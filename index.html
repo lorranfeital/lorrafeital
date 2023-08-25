@@ -55,23 +55,28 @@
     }
 
     async function fetchRedditPosts() {
-        const subreddit = document.getElementById('categorySelector').value;
-        const accessToken = await fetchRedditToken();
-        
-        if (!accessToken) {
-            console.error('Erro ao obter o token de acesso do Reddit.');
-            return;
-        }
-
-        const response = await fetch(`/.netlify/functions/getRedditPosts?subreddit=${subreddit}`, {
-            headers: {
-                'Authorization': accessToken
-            }
-        });
-        
-        const data = await response.json();
-        displayPosts(data);
+    const subreddit = document.getElementById('categorySelector').value;
+    const accessToken = await fetchRedditToken();
+    
+    console.log("Token obtido:", accessToken); // Adicione este log
+    
+    if (!accessToken) {
+        console.error('Erro ao obter o token de acesso do Reddit.');
+        return;
     }
+
+    const response = await fetch(`/.netlify/functions/getRedditPosts?subreddit=${subreddit}`, {
+        headers: {
+            'Authorization': accessToken
+        }
+    });
+    
+    const data = await response.json();
+    console.log("Dados do Reddit:", data); // Adicione este log
+
+    displayPosts(data);
+}
+
 
     function displayPosts(posts) {
         const resultsDiv = document.getElementById('redditResults');
