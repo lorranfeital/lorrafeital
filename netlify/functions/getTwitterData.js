@@ -4,7 +4,7 @@ exports.handler = async function(event, context) {
     const API_URL = "https://api.twitter.com/1.1/trends/place.json?id=1"; // Exemplo: pegar trending topics mundiais
 
     const HEADERS = {
-        Authorization: 'AAAAAAAAAAAAAAAAAAAAAL5hpgEAAAAAYkO7PJiODx5NUZ94A7ZgZlnwA6o%3DF9IJ9ReIgUee6zU0Z1gURSntMnV44vvPcMxZKM8F6EHaZiuOkS', // Substitua SEU_BEARER_TOKEN pelo seu Bearer Token
+        Authorization: 'AAAAAAAAAAAAAAAAAAAAAL5hpgEAAAAAYkO7PJiODx5NUZ94A7ZgZlnwA6o%3DF9IJ9ReIgUee6zU0Z1gURSntMnV44vvPcMxZKM8F6EHaZiuOkS'
         "Content-Type": "application/json"
     };
 
