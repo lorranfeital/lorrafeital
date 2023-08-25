@@ -22,14 +22,19 @@
 </section>
 
 <section id="tendencias-redes-sociais">
-    <h2>Tendências por Rede Social</h2>
-    <div id="abas">
-        <button>Twitter</button>
-        <button>Instagram</button>
-        <button>TikTok</button>
+    <h2>Tendências por Categoria</h2>
+    <div>
+        <select id="categorySelector">
+            <option value="socialmedia">Social</option>
+            <option value="news">Notícias</option>
+            <option value="technology">Tecnologia</option>
+            <option value="movies">Entretenimento</option>
+        </select>
+        <button onclick="fetchRedditPosts()">Buscar Tendências</button>
     </div>
-    <!-- O conteúdo de cada aba será inserido aqui -->
+    <div id="redditResults"></div>
 </section>
+
 
 <section id="conteudos-em-alta">
     <h2>Conteúdos em Alta</h2>
@@ -42,5 +47,54 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/main.js"></script>
+<script>
+    async function fetchRedditToken() {
+        const response = await fetch('/.netlify/functions/getRedditToken');
+        const data = await response.json();
+        return data.access_token;
+    }
+
+    async function fetchRedditPosts() {
+        const subreddit = document.getElementById('categorySelector').value;
+        const accessToken = await fetchRedditToken();
+        
+        if (!accessToken) {
+            console.error('Erro ao obter o token de acesso do Reddit.');
+            return;
+        }
+
+        const response = await fetch(`/.netlify/functions/getRedditPosts?subreddit=${subreddit}`, {
+            headers: {
+                'Authorization': accessToken
+            }
+        });
+        
+        const data = await response.json();
+        displayPosts(data);
+    }
+
+    function displayPosts(posts) {
+        const resultsDiv = document.getElementById('redditResults');
+        resultsDiv.innerHTML = ''; // Limpar resultados anteriores
+        
+        posts.forEach(post => {
+            const postDiv = document.createElement('div');
+            postDiv.className = 'redditPost';
+
+            const title = document.createElement('h3');
+            title.textContent = post.data.title;
+
+            const link = document.createElement('a');
+            link.href = 'https://www.reddit.com' + post.data.permalink;
+            link.textContent = 'Leia mais';
+            link.target = '_blank';
+
+            postDiv.appendChild(title);
+            postDiv.appendChild(link);
+            resultsDiv.appendChild(postDiv);
+        });
+    }
+</script>
+
 </body>
 </html>
