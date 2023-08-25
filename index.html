@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisador de Tendências de Mercado</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-    </style>
+    <title>Tendências em Redes Sociais</title>
+    <!-- Incluir o link para o arquivo CSS aqui -->
 </head>
-
 <body>
 
-    <h2>Tendências de Mercado - Exemplo de Gráfico</h2>
+<header>
+    <div id="logo">Logo</div>
+    <nav>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+    </nav>
+</header>
 
-    <canvas id="meuGrafico" width="400" height="200"></canvas>
+<section id="visao-geral">
+    <h1>Visão Geral das Tendências</h1>
+    <!-- O gráfico do Chart.js será inserido aqui -->
+</section>
 
-    <script>
-        var ctx = document.getElementById('meuGrafico').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
-                datasets: [{
-                    label: 'Vendas',
-                    borderColor: 'rgb(75, 192, 192)',
-                    data: [0, 10, 5, 2, 20]
-                }]
-            },
-            options: {}
-        });
-    </script>
+<section id="tendencias-redes-sociais">
+    <h2>Tendências por Rede Social</h2>
+    <div id="abas">
+        <button>Twitter</button>
+        <button>Instagram</button>
+        <button>TikTok</button>
+    </div>
+    <!-- O conteúdo de cada aba será inserido aqui -->
+</section>
+
+<section id="conteudos-em-alta">
+    <h2>Conteúdos em Alta</h2>
+    <!-- Lista de conteúdos populares -->
+</section>
+
+<footer>
+    Informações de direitos autorais
+</footer>
 
 </body>
-
 </html>
