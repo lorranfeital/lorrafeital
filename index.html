@@ -35,7 +35,6 @@
     <div id="redditResults"></div>
 </section>
 
-
 <section id="conteudos-em-alta">
     <h2>Conteúdos em Alta</h2>
     <!-- Lista de conteúdos populares -->
@@ -55,28 +54,31 @@
     }
 
     async function fetchRedditPosts() {
-    const subreddit = document.getElementById('categorySelector').value;
-    const accessToken = await fetchRedditToken();
-    
-    console.log("Token obtido:", accessToken); // Adicione este log
-    
-    if (!accessToken) {
-        console.error('Erro ao obter o token de acesso do Reddit.');
-        return;
-    }
+        const subreddit = document.getElementById('categorySelector').value;
+        const accessToken = await fetchRedditToken();
 
-    const response = await fetch(`/.netlify/functions/getRedditPosts?subreddit=${subreddit}`, {
-        headers: {
-            'Authorization': accessToken
+        console.log("Token obtido:", accessToken); // Log do token
+        
+        if (!accessToken) {
+            console.error('Erro ao obter o token de acesso do Reddit.');
+            return;
         }
-    });
-    
-    const data = await response.json();
-    console.log("Dados do Reddit:", data); // Adicione este log
 
-    displayPosts(data);
-}
+        const response = await fetch(`/.netlify/functions/getRedditPosts?subreddit=${subreddit}`, {
+            headers: {
+                'Authorization': accessToken
+            }
+        });
+        
+        const data = await response.json();
 
+        // Verifique se data e data.data estão definidos antes de tentar acessar children
+        if (data && data.data && data.data.children) {
+            displayPosts(data.data.children);
+        } else {
+            console.error("Dados do Reddit não estão no formato esperado:", data);
+        }
+    }
 
     function displayPosts(posts) {
         const resultsDiv = document.getElementById('redditResults');
