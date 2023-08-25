@@ -65,6 +65,16 @@ section h1, section h2 {
     background-color: #ddd;
 }
 
+.redditPost {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.redditPost h3 {
+    margin-top: 0;
+}
+
 /* Estilos do Rodapé */
 footer {
     margin-top: 40px;
