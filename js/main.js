@@ -1,33 +1,38 @@
+// 1. Inicialização e Event Listeners
 document.getElementById("fetchButton").addEventListener("click", fetchRedditPosts);
 
-let ctx = document.getElementById('tendenciasGerais').getContext('2d');
-let tendenciasGeraisChart = new Chart(ctx, {
-    type: 'bar', // ou 'line', 'pie', etc.
-    data: {
-        labels: ['Tendência 1', 'Tendência 2', 'Tendência 3'], // Tópicos das tendências
-        datasets: [{
-            label: 'Número de Menções',
-            data: [12, 19, 3], // Dados fictícios; você substituirá isso pelos dados reais
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        // Opções adicionais do gráfico (opcional)
-    }
-});
-
+// 2. Variáveis Globais
 let chart; // Variável para armazenar o gráfico
 
+// 3. Funções
+
+// Função para buscar posts do Reddit
+async function fetchRedditPosts() {
+    const REDDIT_TOKEN_URL = "https://celebrated-muffin-2cf7e6.netlify.app/.netlify/functions/getRedditToken";
+    const REDDIT_POSTS_URL = "https://celebrated-muffin-2cf7e6.netlify.app/.netlify/functions/getRedditPosts";
+    
+    try {
+        // Primeiro, obtenha o token de acesso
+        const tokenResponse = await fetch(REDDIT_TOKEN_URL);
+        const tokenData = await tokenResponse.json();
+        const accessToken = tokenData.access_token;
+
+        // Use o token de acesso para buscar as postagens
+        const postsResponse = await fetch(REDDIT_POSTS_URL, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        
+        const postData = await postsResponse.json();
+        displayChart(postData.data.children); // Passa as postagens para a função displayChart
+
+    } catch (error) {
+        console.error("Erro ao buscar posts do Reddit:", error);
+    }
+}
+
+// Função para exibir um gráfico com os dados do Reddit
 function displayChart(posts) {
     const ctx = document.getElementById('tendenciasGerais').getContext('2d');
 
